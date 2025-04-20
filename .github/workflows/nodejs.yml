@@ -11,7 +11,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: 'vscode-styled-jsx-languageserver'
+        working-directory: 'vscode-scoped-styles-languageserver'
     steps:
       - uses: 'actions/checkout@v2'
 

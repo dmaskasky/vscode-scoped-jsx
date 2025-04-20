@@ -1,34 +1,34 @@
-# vscode-styled-jsx-languageserver
+# vscode-scoped-styles-languageserver
 
-[Main GitHub Repo](https://github.com/Divlo/vscode-styled-jsx/).
+[Main GitHub Repo](https://github.com/dmaskasky/vscode-scoped-styles/).
 
-Language server for [styled-jsx](https://github.com/vercel/styled-jsx).
+Language server for [scoped-styles](https://github.com/vercel/scoped-styles).
 
 ## Features
 
 - `CSS` code completion
 
-  ![css-completion](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/completion.gif)
+  ![css-completion](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/completion.gif)
 
 - Hovers
 
-  ![hover](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/hover.gif)
+  ![hover](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/hover.gif)
 
 - Color picker
 
-  ![color-picker](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/color-picker.gif)
+  ![color-picker](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/color-picker.gif)
 
 - Quick fixes
 
-  ![quick-fixes](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/quick-fixes.gif)
+  ![quick-fixes](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/quick-fixes.gif)
 
 - Multiple `<style jsx/>` tags in file
 
-  ![multiple-styled-jsx](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/multiple-styled-jsx.png)
+  ![multiple-scoped-styles](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/multiple-scoped-styles.png)
 
-- External styles `styled-jsx/css`
+- External styles `scoped-styles/css`
 
-  ![external-styles](https://raw.githubusercontent.com/Divlo/vscode-styled-jsx/master/.github/images/external-styles.png)
+  ![external-styles](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/external-styles.png)
 
 ## How it works
 

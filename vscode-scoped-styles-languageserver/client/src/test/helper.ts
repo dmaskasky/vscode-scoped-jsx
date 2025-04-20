@@ -11,7 +11,7 @@ export let platformEol: string
  */
 export async function activate (docUri: vscode.Uri): Promise<void> {
   const ext = vscode.extensions.getExtension(
-    'Divlo.vscode-styled-jsx-languageserver'
+    'dmaskasky.vscode-scoped-styles-languageserver'
   )
   await ext?.activate()
   try {

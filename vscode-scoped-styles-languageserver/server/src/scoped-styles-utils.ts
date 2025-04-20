@@ -2,36 +2,36 @@ import * as ts from 'typescript'
 import { Stylesheet, TextDocument } from 'vscode-css-languageservice'
 import { LanguageModelCache } from './language-model-cache'
 
-export interface StyledJsxTaggedTemplate {
+export interface ScopedStylesTaggedTemplate {
   start: number
   end: number
 }
 
-export interface StyledJsxTagAttributes {
+export interface ScopedStylesTagAttributes {
   firstAttributeName: string | undefined
   secondAttributeName: string | undefined
 }
 
-export interface StyledJsx {
+export interface ScopedStyles {
   cssDocument: TextDocument
   stylesheet: Stylesheet
 }
 
-const styledJsxPattern = /((<\s*?style\s*?(global)?\s*?jsx\s*?(global)?\s*?>)|(\s*?css(.*)\s*?`))/g
+const scopedStylesPattern = /((<\s*?style\s*?(global)?\s*?jsx\s*?(global)?\s*?>)|(\s*?css(.*)\s*?`))/g
 
-export function getApproximateStyledJsxOffsets (
+export function getApproximateScopedStylesOffsets (
   document: TextDocument
 ): number[] {
   const results = []
   const doc = document.getText()
-  while (styledJsxPattern.exec(doc) != null) {
-    results.push(styledJsxPattern.lastIndex)
+  while (scopedStylesPattern.exec(doc) != null) {
+    results.push(scopedStylesPattern.lastIndex)
   }
   return results
 }
 
 // css`button { position: relative; }`
-export function isStyledJsxTaggedTemplate (token: ts.Node): boolean {
+export function isScopedStylesTaggedTemplate (token: ts.Node): boolean {
   return (
     token.parent.kind === ts.SyntaxKind.TaggedTemplateExpression &&
     token.parent.getText().startsWith('css')
@@ -71,7 +71,7 @@ function getTemplateString (
   return undefined
 }
 
-function isStyledJsxTemplate (node: ts.Node): boolean {
+function isScopedStylesTemplate (node: ts.Node): boolean {
   if (!ts.isJsxExpression(node.parent)) {
     return false
   }
@@ -97,9 +97,9 @@ function isStyledJsxTemplate (node: ts.Node): boolean {
   return false
 }
 
-function findStyledJsxTaggedTemplate (
+function findScopedStylesTaggedTemplate (
   textDocument: TextDocument
-): StyledJsxTaggedTemplate[] {
+): ScopedStylesTaggedTemplate[] {
   const source = ts.createSourceFile(
     'tmp',
     textDocument.getText(),
@@ -108,13 +108,13 @@ function findStyledJsxTaggedTemplate (
     ts.ScriptKind.TSX
   )
 
-  const templates: StyledJsxTaggedTemplate[] = []
+  const templates: ScopedStylesTaggedTemplate[] = []
   walk(source, node => {
     const templateNode = getTemplateString(node)
     if (templateNode != null) {
       if (
-        isStyledJsxTemplate(templateNode) ||
-        isStyledJsxTaggedTemplate(templateNode)
+        isScopedStylesTemplate(templateNode) ||
+        isScopedStylesTaggedTemplate(templateNode)
       ) {
         templates.push({
           start: templateNode.getStart() + 1,
@@ -130,29 +130,29 @@ function findStyledJsxTaggedTemplate (
 const expressionPattern = /(.*\${.*}.*)|(.*(&&|[||]).*)/g
 export function replaceAllWithSpacesExceptCss (
   textDocument: TextDocument,
-  styledJsxTaggedTemplates: StyledJsxTaggedTemplate[],
+  scopedStylesTaggedTemplates: ScopedStylesTaggedTemplate[],
   stylesheets: LanguageModelCache<Stylesheet>
 ): { cssDocument: TextDocument, stylesheet: Stylesheet } {
   const text = textDocument.getText()
   let result = ''
   // Code that goes before CSS
-  result += text.slice(0, styledJsxTaggedTemplates[0].start).replace(/./g, ' ')
-  for (let i = 0; i < styledJsxTaggedTemplates.length; i++) {
+  result += text.slice(0, scopedStylesTaggedTemplates[0].start).replace(/./g, ' ')
+  for (let i = 0; i < scopedStylesTaggedTemplates.length; i++) {
     /* CSS itself with dirty hacks. Maybe there is better solution.
     We need to find all expressions in CSS and replace each character of expression with space.
     This is neccessary to preserve character count */
     result += text
-      .slice(styledJsxTaggedTemplates[i].start, styledJsxTaggedTemplates[i].end)
+      .slice(scopedStylesTaggedTemplates[i].start, scopedStylesTaggedTemplates[i].end)
       .replace(expressionPattern, (_str, p1) => {
         return p1.replace(/./g, ' ')
       })
-    const hasSeveralCSSParts = i + 1 < styledJsxTaggedTemplates.length
+    const hasSeveralCSSParts = i + 1 < scopedStylesTaggedTemplates.length
     if (hasSeveralCSSParts) {
       // Code that is in between that CSS parts
       result += text
         .slice(
-          styledJsxTaggedTemplates[i].end,
-          styledJsxTaggedTemplates[i + 1].start
+          scopedStylesTaggedTemplates[i].end,
+          scopedStylesTaggedTemplates[i + 1].start
         )
         .replace(/./g, ' ')
     }
@@ -160,7 +160,7 @@ export function replaceAllWithSpacesExceptCss (
   // Code that goes after CSS
   result += text
     .slice(
-      styledJsxTaggedTemplates[styledJsxTaggedTemplates.length - 1].end,
+      scopedStylesTaggedTemplates[scopedStylesTaggedTemplates.length - 1].end,
       text.length
     )
     .replace(/./g, ' ')
@@ -177,18 +177,18 @@ export function replaceAllWithSpacesExceptCss (
   }
 }
 
-export function getStyledJsx (
+export function getScopedStyles (
   document: TextDocument,
   stylesheets: LanguageModelCache<Stylesheet>
-): StyledJsx | undefined {
+): ScopedStyles | undefined {
   try {
-    const styledJsxOffsets = getApproximateStyledJsxOffsets(document)
-    if (styledJsxOffsets.length > 0) {
-      const styledJsxTaggedTemplates = findStyledJsxTaggedTemplate(document)
-      if (styledJsxTaggedTemplates.length > 0) {
+    const scopedStylesOffsets = getApproximateScopedStylesOffsets(document)
+    if (scopedStylesOffsets.length > 0) {
+      const scopedStylesTaggedTemplates = findScopedStylesTaggedTemplate(document)
+      if (scopedStylesTaggedTemplates.length > 0) {
         return replaceAllWithSpacesExceptCss(
           document,
-          styledJsxTaggedTemplates,
+          scopedStylesTaggedTemplates,
           stylesheets
         )
       }

@@ -1,16 +1,16 @@
 {
-	"name": "styled-jsx-languageclient",
-	"description": "styled-jsx language client",
-	"author": "Divlo",
+	"name": "scoped-styles-languageclient",
+	"description": "scoped-styles language client",
+	"author": "dmaskasky",
 	"license": "MIT",
 	"version": "0.0.1",
-	"publisher": "Divlo",
+	"publisher": "dmaskasky",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Divlo/vscode-styled-jsx"
+		"url": "https://github.com/dmaskasky/vscode-scoped-styles"
 	},
 	"ts-standard": {
 		"files": [

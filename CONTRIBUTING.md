@@ -1,6 +1,6 @@
 # 💡 Contributing
 
-Thanks a lot for your interest in contributing to **vscode-styled-jsx**! 🎉
+Thanks a lot for your interest in contributing to **vscode-scoped-styles**! 🎉
 
 ## Types of contributions
 
@@ -11,13 +11,13 @@ Thanks a lot for your interest in contributing to **vscode-styled-jsx**! 🎉
 
 ## Pull Requests
 
-- **Please first discuss** the change you wish to make via [issue](https://github.com/Divlo/vscode-styled-jsx/issues) before making a change. It might avoid a waste of your time.
+- **Please first discuss** the change you wish to make via [issue](https://github.com/dmaskasky/vscode-scoped-styles/issues) before making a change. It might avoid a waste of your time.
 
 - Ensure your code respect linting.
 
 - Make sure your **code passes the tests**.
 
-If you're adding new features to **vscode-styled-jsx**, please include tests.
+If you're adding new features to **vscode-scoped-styles**, please include tests.
 
 ## Commits
 

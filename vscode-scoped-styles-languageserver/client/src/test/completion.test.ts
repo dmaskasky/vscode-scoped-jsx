@@ -12,7 +12,7 @@ const displayCompletionList = {
   ]
 }
 
-test('Completes CSS in styled-jsx component', async () => {
+test('Completes CSS in scoped-styles component', async () => {
   const defaultUri = getDocUri('default.js')
   const highlightUri = getDocUri('highlight.js')
   const multiLineUri = getDocUri('multi-line.tsx')

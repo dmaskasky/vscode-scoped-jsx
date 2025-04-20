@@ -1,4 +1,4 @@
-import css from 'styled-jsx/css'
+import css from 'scoped-styles/css'
 
 export const Button = props => (
   <button className='test'>

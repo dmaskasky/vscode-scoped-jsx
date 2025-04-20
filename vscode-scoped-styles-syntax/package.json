@@ -1,17 +1,17 @@
 {
-  "name": "vscode-styled-jsx-syntax",
-  "displayName": "styled-jsx Syntax Highlighting",
-  "description": "Syntax highlighting for styled-jsx",
+  "name": "vscode-scoped-styles-syntax",
+  "displayName": "scoped-styles Syntax Highlighting",
+  "description": "Syntax highlighting for scoped-styles",
   "version": "1.3.1",
-  "publisher": "Divlo",
+  "publisher": "dmaskasky",
   "author": {
-    "name": "Divlo",
-    "email": "contact@divlo.fr",
-    "url": "https://github.com/Divlo"
+    "name": "dmaskasky",
+    "email": "dmaskasky@gmail.com",
+    "url": "https://github.com/dmaskasky"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Divlo/vscode-styled-jsx"
+    "url": "https://github.com/dmaskasky/vscode-scoped-styles"
   },
   "license": "MIT",
   "engines": {
@@ -44,8 +44,8 @@
           "source.js.jsx",
           "source.tsx"
         ],
-        "scopeName": "styled-jsx",
-        "path": "./syntaxes/jsx-styled.json",
+        "scopeName": "scoped-styles",
+        "path": "./syntaxes/scoped-styles.json",
         "embeddedLanguages": {
           "source.css.scss": "css",
           "meta.embedded.line.ts": "typescript"

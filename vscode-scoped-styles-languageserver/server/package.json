@@ -1,8 +1,8 @@
 {
-  "name": "styled-jsx-languageserver",
-  "description": "styled-jsx language server",
+  "name": "scoped-styles-languageserver",
+  "description": "scoped-styles language server",
   "version": "0.0.1",
-  "author": "Divlo",
+  "author": "dmaskasky",
   "license": "MIT",
   "engines": {
     "node": "*"

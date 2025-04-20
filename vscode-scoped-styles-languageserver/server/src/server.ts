@@ -18,7 +18,7 @@ import {
 import { TextDocument } from 'vscode-languageserver-textdocument'
 
 import { getLanguageModelCache } from './language-model-cache'
-import { getStyledJsx, StyledJsx } from './styled-jsx-utils'
+import { getScopedStyles, ScopedStyles } from './scoped-styles-utils'
 
 const connection = createConnection(ProposedFeatures.all)
 const textDocuments = new TextDocuments(TextDocument)
@@ -64,9 +64,9 @@ async function validateTextDocument (
   textDocument: TextDocument
 ): Promise<void> {
   const settings = await getDocumentSettings()
-  const styledJsx = getStyledJsx(textDocument, stylesheets)
-  if (styledJsx != null) {
-    const { cssDocument, stylesheet } = styledJsx
+  const scopedStyles = getScopedStyles(textDocument, stylesheets)
+  if (scopedStyles != null) {
+    const { cssDocument, stylesheet } = scopedStyles
     const diagnostics: Diagnostic[] = cssLanguageService
       .doValidation(cssDocument, stylesheet, settings)
       .map(d => {
@@ -83,15 +83,15 @@ async function validateTextDocument (
 
 function requestHandler (
   params: TextDocumentPositionParams | DocumentSymbolParams,
-  callback: (styledJsx: StyledJsx) => HandlerResult<any, any>
+  callback: (scopedStyles: ScopedStyles) => HandlerResult<any, any>
 ): HandlerResult<any, any> {
   const document = textDocuments.get(params.textDocument.uri)
   if (document == null) {
     return null
   }
-  const styledJsx = getStyledJsx(document, stylesheets)
-  if (styledJsx != null) {
-    return callback(styledJsx)
+  const scopedStyles = getScopedStyles(document, stylesheets)
+  if (scopedStyles != null) {
+    return callback(scopedStyles)
   }
 }
 

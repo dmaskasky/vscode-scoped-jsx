@@ -60,8 +60,8 @@ export function activate (context: ExtensionContext): void {
     initializationOptions: {}
   }
   const client = new LanguageClient(
-    'styled.jsx',
-    'styled-jsx Language Server',
+    'scoped.styles',
+    'scoped-styles Language Server',
     serverOptions,
     clientOptions
   )
@@ -175,7 +175,7 @@ export function activate (context: ExtensionContext): void {
     }
   })
 
-  commands.registerCommand('styled.jsx.applyCodeAction', applyCodeAction)
+  commands.registerCommand('scoped.styles.applyCodeAction', applyCodeAction)
   async function applyCodeAction (
     uri: string,
     documentVersion: number,

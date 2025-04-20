@@ -1,5 +1,5 @@
 /* styles.js */
-import css from 'styled-jsx/css'
+import css from 'scoped-styles/css'
 
 /* should be identified as styled jsx style and hightlight */
 // Scoped styles

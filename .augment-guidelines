@@ -1,0 +1,63 @@
+[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-START)
+# AGENT.md - Codebase Information for Coding Agents
+
+## Project Structure
+This codebase consists of two main packages:
+1. `vscode-scoped-styles-languageserver` - Language server implementation
+2. `vscode-scoped-styles-syntax` - Syntax highlighting extension
+
+## Build Commands
+
+### Language Server
+```bash
+# Install dependencies for both client and server
+npm install  # or: npm run postinstall
+
+# Compile TypeScript code
+npm run compile
+
+# Watch mode for development
+npm run watch
+```
+
+### Syntax Package
+No explicit build commands (primarily JSON configuration files).
+
+## Test Commands
+
+### Language Server
+```bash
+# Run all tests
+npm test  # Runs e2e.sh script after compiling
+
+# Run specific test (after compiling)
+npm run compile
+cd client
+npx mocha out/test/completion.test.js
+# Or by test name
+npx mocha out/test/completion.test.js -g "Completes CSS in scoped-styles component"
+```
+
+### Syntax Package
+No automated tests. Manual test fixtures in `test/fixture/`.
+
+## Test Organization
+
+### Language Server
+- Uses Mocha with TDD UI
+- Test files in `client/src/test/` with `.test.ts` extension
+- Main test files:
+  - `completion.test.ts` - Code completion tests
+  - `hover.test.ts` - Hover information tests
+  - `helper.ts` - Test helper functions
+  - `index.ts` - Test runner
+  - `runTest.ts` - Entry point for VS Code extension testing
+- Test fixtures in `client/testFixture/`
+- Uses VS Code's extension testing framework (`vscode-test`)
+
+## Linting and Formatting
+Both packages use `ts-standard`:
+```bash
+npm run lint    # Lint code
+npm run format  # Format code
+[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-END)
