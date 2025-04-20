@@ -1,4 +1,4 @@
-import { addEventListener } from "./utils";
+import { addEventListener } from "app/utils/extra";
 import { dedent } from "ts-dedent";
 
 export const SCOPED_CSS = {
@@ -12,7 +12,7 @@ export const SCOPED_CSS = {
  * It uses a MutationObserver to:
  *  1. Wrap newly added <style scoped>.
  *  2. Re-wrap the text if the content of an existing <style scoped> changes.
- *  3. Wrap / unwrap the text if the jsx attribute is added or removed.
+ *  3. Wrap / unwrap the text if the scoped attribute is added or removed.
  */
 
 export function applyPolyfill() {
@@ -67,12 +67,6 @@ export function applyPolyfill() {
    * Prevent re-processing by comparing old vs. new text.
    */
   function upgradeStyle(styleEl: HTMLStyleElement): void {
-    console.log(
-      "upgrade Style",
-      styleEl.hasAttribute(SCOPED_CSS.attr),
-      styleEl.getAttribute(SCOPED_CSS.attr),
-      styleEl.getAttribute("class"),
-    );
     if (!styleEl.hasAttribute(SCOPED_CSS.attr)) {
       return; // Not actually <style scoped>, bail out
     }
@@ -122,13 +116,9 @@ export function applyPolyfill() {
   } else {
     upgradeAllExisting();
   }
-  const cleanup = () => {
-    removeListener();
-    observer.disconnect();
-  };
 
   // 2. Observe changes to the DOM so we can catch new/modified <style scoped> elements.
-  const observer = new MutationObserver((mutations) => {
+  SCOPED_CSS.observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       mutation.addedNodes.forEach((addedNode) => {
         let node = addedNode;
@@ -174,13 +164,18 @@ export function applyPolyfill() {
     }
   });
 
-  observer.observe(document.documentElement, {
+  SCOPED_CSS.observer.observe(document.documentElement, {
     childList: true,
     subtree: true,
     characterData: true,
     attributes: true,
     attributeFilter: [SCOPED_CSS.attr],
   });
+
+  SCOPED_CSS.cleanup = () => {
+    removeListener();
+    SCOPED_CSS.observer.disconnect();
+  };
 
   window.SCOPED_CSS = SCOPED_CSS;
 }

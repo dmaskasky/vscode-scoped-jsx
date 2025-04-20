@@ -17,7 +17,7 @@ export interface ScopedStyles {
   stylesheet: Stylesheet
 }
 
-const scopedStylesPattern = /((<\s*?style\s*?(global)?\s*?jsx\s*?(global)?\s*?>)|(\s*?css(.*)\s*?`))/g
+const scopedStylesPattern = /((<\s*?style\s*?(global)?\s*?scoped\s*?(global)?\s*?>)|(\s*?css(.*)\s*?`))/g
 
 export function getApproximateScopedStylesOffsets (
   document: TextDocument
@@ -89,7 +89,7 @@ function isScopedStylesTemplate (node: ts.Node): boolean {
   }
 
   for (const prop of opener.attributes.properties) {
-    if (prop.name != null && prop.name.getText() === 'jsx') {
+    if (prop.name != null && prop.name.getText() === 'scoped') {
       return true
     }
   }

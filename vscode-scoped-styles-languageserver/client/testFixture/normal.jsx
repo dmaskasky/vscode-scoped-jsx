@@ -4,7 +4,7 @@ export const Button = props => (
   <button>
     {props.children}
     {/* Support SCSS syntax */}
-    <style jsx>{`
+    <style scoped>{`
       button {
         color: #333;
 
@@ -13,7 +13,7 @@ export const Button = props => (
         }
       }
     `}</style>
-    <style jsx>
+    <style scoped>
       {`
         button {
           color: rgb(155, 84, 84);
@@ -23,7 +23,7 @@ export const Button = props => (
         }
       `}
     </style>
-    <style jsx global>{`
+    <style scoped global>{`
       button {
         padding: ${'large' in props ? '50' : '20'}px;
         position: relative;

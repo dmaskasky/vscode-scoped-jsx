@@ -25,7 +25,7 @@
       {
         "id": "source.css.scss.jsx.styled",
         "aliases": [
-          "SCSS (Styled JSX)"
+          "SCSS (Scoped Styles)"
         ],
         "configuration": "./language-configuration.json"
       }

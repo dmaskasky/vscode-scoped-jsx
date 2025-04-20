@@ -3,7 +3,7 @@ import css from 'scoped-styles/css'
 export const Button = props => (
   <button className='test'>
     {props.children}
-    <style jsx>{`
+    <style scoped>{`
       button {
         display: block;
         color: rgb(18, 30, 102);
@@ -11,7 +11,7 @@ export const Button = props => (
         display: block;
       }
     `}</style>
-    <style jsx global>{`
+    <style scoped global>{`
       .test {
         font-size: large;
 
@@ -20,7 +20,7 @@ export const Button = props => (
         }
       }
     `}</style>
-    <style global jsx>
+    <style global scoped>
       {`
         button {
           display: block;

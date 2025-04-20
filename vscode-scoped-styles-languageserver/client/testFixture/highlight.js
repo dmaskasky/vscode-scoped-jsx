@@ -1,7 +1,7 @@
 /* styles.js */
 import css from 'scoped-styles/css'
 
-/* should be identified as styled jsx style and hightlight */
+/* should be identified as scoped styles style and hightlight */
 // Scoped styles
 export const button = css`
   button {

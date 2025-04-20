@@ -22,7 +22,7 @@ Language server for [scoped-styles](https://github.com/vercel/scoped-styles).
 
   ![quick-fixes](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/quick-fixes.gif)
 
-- Multiple `<style jsx/>` tags in file
+- Multiple `<style scoped/>` tags in file
 
   ![multiple-scoped-styles](https://raw.githubusercontent.com/dmaskasky/vscode-scoped-styles/master/.github/images/multiple-scoped-styles.png)
 
@@ -40,13 +40,13 @@ Consider this component:
 const Button = (props) => (
   <button>
     {props.children}
-    <style jsx>{`
+    <style scoped>{`
       button {
         display: inline-block;
         font-size: 2em;
       }
     `}</style>
-    <style jsx>{`
+    <style scoped>{`
       button {
         padding: ${'large' in props ? '50' : '20'}px;
         position: relative;

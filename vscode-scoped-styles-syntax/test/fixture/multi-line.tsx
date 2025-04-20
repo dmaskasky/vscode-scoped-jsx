@@ -3,7 +3,7 @@ const color = '#181818'
 const Header = () => (
   <div>
     <h1>Header</h1>
-    <style jsx>
+    <style scoped>
       {`
         h1 {
           color: red;
@@ -15,7 +15,7 @@ const Header = () => (
     </style>
     <div>
       <h1>Header</h1>
-      <style jsx>{`
+      <style scoped>{`
         .root {
           max-width: 760px;
           padding-top: 5px;
